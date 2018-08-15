@@ -74,8 +74,11 @@ function onRoll() {
 }
 
 function updateHitDisplay() {
-    eHit.textContent = getRollTotal() >= getDCTotal() ? "Hit" : "Miss";
-    eTotalRoll.textContent = getRollTotal();
+    const rollTotal = getRollTotal();
+    const isHit = rollTotal >= getDCTotal();
+    eHit.textContent = isHit ? "Hit" : "Miss";
+    eHit.style.color = isHit ? "green" : "red";
+    eTotalRoll.textContent = rollTotal;
 }
 
 function getRollTotal() {
