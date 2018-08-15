@@ -67,11 +67,11 @@ function updateDistanceDisplay() {
 
 function updateRangeCategory(rangeCategory) {
     curRangeCategory = rangeCategory;
-    updateDCDisplay(curRangeCategory.value);
+    updateDCDisplay(curRangeCategory.DC);
 }
 
 function updateDCDisplay(dc) {
-    //eDC.text = dc;
+    eDC.textContent = dc;
 }
 
 eDistance.addEventListener("change", onDistanceOrRangeInput);
