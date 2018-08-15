@@ -44,6 +44,10 @@ function GetRangeCategory(distance, listedRange) {
 const eDistance = document.getElementById("distance");
 const eListedRange = document.getElementById("listedRange");
 const eDC = document.getElementById("dc");
+const eHit = document.getElementById("hit");
+const eAttribute = document.getElementById("attribute");
+const eSkill = document.getElementById("skill");
+const eHitRoll = document.getElementById("hitRoll");
 var curRangeCategory;
 
 function onDistanceOrRangeInput() {
@@ -51,14 +55,29 @@ function onDistanceOrRangeInput() {
     updateRangeCategoryDisplay();
 }
 
-function updateRangeCategoryDisplay() {
-    document.getElementById(curRangeCategory.id).checked = true;
-}
-
 function onRangeCategoryInput(e) {
     const rangeCategoryId = e.target.id;
     updateRangeCategory(RANGE_CATEGORIES.find(category => category.id == rangeCategoryId));
     updateDistanceDisplay();
+}
+
+
+function updateHitDisplay() {
+    console.log(getRollTotal());
+    console.log(getDCTotal());
+    eHit.textContent = getRollTotal() >= getDCTotal() ? "Hit" : "Miss";
+}
+
+function getRollTotal() {
+    return Number(eHitRoll.value) + Number(eAttribute.value) + Number(eSkill.value);
+}
+
+function getDCTotal() {
+    return curRangeCategory.DC;
+}
+
+function updateRangeCategoryDisplay() {
+    document.getElementById(curRangeCategory.id).checked = true;
 }
 
 function updateDistanceDisplay() {
@@ -68,6 +87,7 @@ function updateDistanceDisplay() {
 function updateRangeCategory(rangeCategory) {
     curRangeCategory = rangeCategory;
     updateDCDisplay(curRangeCategory.DC);
+    updateHitDisplay();
 }
 
 function updateDCDisplay(dc) {
@@ -76,6 +96,9 @@ function updateDCDisplay(dc) {
 
 eDistance.addEventListener("change", onDistanceOrRangeInput);
 eListedRange.addEventListener("change", onDistanceOrRangeInput);
+eHitRoll.addEventListener("change", updateHitDisplay );
+eAttribute.addEventListener("change", updateHitDisplay );
+eSkill.addEventListener("change", updateHitDisplay );
 for (let eRangeCategory of document.querySelectorAll("#rangeCategory")) {
     eRangeCategory.addEventListener("change", onRangeCategoryInput);
 }

@@ -15,10 +15,10 @@
 	<h1>Friday Night Firefight</h1>
 	<h2>Ranged Combat</h2>
 	<form>
-	    <input type="number">Hit Roll</input>
+	    <input type="number" id="hitRoll">Hit Roll</input>
 	    <input type="number">Dmg Roll</input>
-    	    <input type="number" value="9">REF</input>
-    	    <input type="number" value="4">Skill</input>
+    	    <input type="number" id="attribute" value="9">REF</input>
+    	    <input type="number" id="skill" value="4">Skill</input>
 	    <input type="number" id="listedRange" value="50">Listed Range</input>
 	    <input type="number" id="distance" value="25">Distance to Target</input>
 	    <fieldset id="rangeCategory">
@@ -39,5 +39,6 @@
 	</form>
 
 	Roll needed to hit:<div id="dc"></div>
+	<div id="hit"></div>
     </body>
 </html>
