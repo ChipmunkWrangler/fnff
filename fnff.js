@@ -43,19 +43,35 @@ function GetRangeCategory(distance, listedRange) {
 
 const eDistance = document.getElementById("distance");
 const eListedRange = document.getElementById("listedRange");
+const eDC = document.getElementById("dc");
 var curRangeCategory;
 
 function onDistanceOrRangeInput() {
-    curRangeCategory = GetRangeCategory(eDistance.value, eListedRange.value);
-    console.log(curRangeCategory.id);
+    updateRangeCategory( GetRangeCategory(eDistance.value, eListedRange.value) );
+    updateRangeCategoryDisplay();
+}
+
+function updateRangeCategoryDisplay() {
     document.getElementById(curRangeCategory.id).checked = true;
 }
 
 function onRangeCategoryInput(e) {
     const rangeCategoryId = e.target.id;
-    curRangeCategory = RANGE_CATEGORIES.find(category => category.id == rangeCategoryId);
+    updateRangeCategory(RANGE_CATEGORIES.find(category => category.id == rangeCategoryId));
+    updateDistanceDisplay();
+}
+
+function updateDistanceDisplay() {
     eDistance.value = eListedRange.value * curRangeCategory.listedRangeFraction;
-    console.log(rangeCategoryId);
+}
+
+function updateRangeCategory(rangeCategory) {
+    curRangeCategory = rangeCategory;
+    updateDC(curRangeCategory.value);
+}
+
+function updateDC(dc) {
+    //eDC.text = dc;
 }
 
 eDistance.onchange = onDistanceOrRangeInput;
