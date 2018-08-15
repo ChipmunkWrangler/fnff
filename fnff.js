@@ -61,6 +61,16 @@ function onRangeCategoryInput(e) {
     updateDistanceDisplay();
 }
 
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+}
+
+function onRoll() {
+    eHitRoll.value = getRandomIntInclusive(1,10);
+    updateHitDisplay();
+}
 
 function updateHitDisplay() {
     console.log(getRollTotal());
@@ -99,6 +109,7 @@ eListedRange.addEventListener("change", onDistanceOrRangeInput);
 eHitRoll.addEventListener("change", updateHitDisplay );
 eAttribute.addEventListener("change", updateHitDisplay );
 eSkill.addEventListener("change", updateHitDisplay );
+document.getElementById("roll").addEventListener("click", onRoll);
 for (let eRangeCategory of document.querySelectorAll("#rangeCategory")) {
     eRangeCategory.addEventListener("change", onRangeCategoryInput);
 }
