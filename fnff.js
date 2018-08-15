@@ -62,22 +62,22 @@ function onRangeCategoryInput(e) {
 }
 
 function updateDistanceDisplay() {
-    eDistance.value = eListedRange.value * curRangeCategory.listedRangeFraction;
+    eDistance.value = Math.floor(eListedRange.value * curRangeCategory.listedRangeFraction);
 }
 
 function updateRangeCategory(rangeCategory) {
     curRangeCategory = rangeCategory;
-    updateDC(curRangeCategory.value);
+    updateDCDisplay(curRangeCategory.value);
 }
 
-function updateDC(dc) {
+function updateDCDisplay(dc) {
     //eDC.text = dc;
 }
 
-eDistance.onchange = onDistanceOrRangeInput;
-eListedRange.onchange = onDistanceOrRangeInput;
+eDistance.addEventListener("change", onDistanceOrRangeInput);
+eListedRange.addEventListener("change", onDistanceOrRangeInput);
 for (let eRangeCategory of document.querySelectorAll("#rangeCategory")) {
-    eRangeCategory.onchange = onRangeCategoryInput;
+    eRangeCategory.addEventListener("change", onRangeCategoryInput);
 }
 
 onDistanceOrRangeInput();
