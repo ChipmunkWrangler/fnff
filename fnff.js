@@ -48,6 +48,7 @@ const eHit = document.getElementById("hit");
 const eAttribute = document.getElementById("attribute");
 const eSkill = document.getElementById("skill");
 const eHitRoll = document.getElementById("hitRoll");
+const eTotalRoll = document.getElementById("totalRoll");
 var curRangeCategory;
 
 function onDistanceOrRangeInput() {
@@ -73,9 +74,8 @@ function onRoll() {
 }
 
 function updateHitDisplay() {
-    console.log(getRollTotal());
-    console.log(getDCTotal());
     eHit.textContent = getRollTotal() >= getDCTotal() ? "Hit" : "Miss";
+    eTotalRoll.textContent = getRollTotal();
 }
 
 function getRollTotal() {
