@@ -45,12 +45,25 @@ const eDistance = document.getElementById("distance");
 const eListedRange = document.getElementById("listedRange");
 var curRangeCategory;
 
-function updateCurRangeCategory() {
+function onDistanceOrRangeInput() {
     curRangeCategory = GetRangeCategory(eDistance.value, eListedRange.value);
     console.log(curRangeCategory.id);
     document.getElementById(curRangeCategory.id).checked = true;
 }
-updateCurRangeCategory();
-eDistance.onchange = updateCurRangeCategory;
-eListedRange.onchange = updateCurRangeCategory;
+
+function onRangeCategoryInput(e) {
+    const rangeCategoryId = e.target.id;
+    curRangeCategory = RANGE_CATEGORIES.find(category => category.id == rangeCategoryId);
+    eDistance.value = eListedRange.value * curRangeCategory.listedRangeFraction;
+    console.log(rangeCategoryId);
+}
+
+eDistance.onchange = onDistanceOrRangeInput;
+eListedRange.onchange = onDistanceOrRangeInput;
+for (let eRangeCategory of document.querySelectorAll("#rangeCategory")) {
+    eRangeCategory.onchange = onRangeCategoryInput;
+}
+
+onDistanceOrRangeInput();
+
 
