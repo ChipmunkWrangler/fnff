@@ -33,18 +33,24 @@ const RANGE_CATEGORIES = [
     },
 ]
 
-function GetRangeCategory(dist, listedRange) {
+function GetRangeCategory(distance, listedRange) {
     for (let rangeCategory of RANGE_CATEGORIES) {
-	if (dist <= listedRange * rangeCategory.listedRangeFraction) {
+	if (distance <= listedRange * rangeCategory.listedRangeFraction) {
 	    return rangeCategory;
 	}
     }
 }
 
+const eDistance = document.getElementById("distance");
+const eListedRange = document.getElementById("listedRange");
+var curRangeCategory;
 
-const dist = document.getElementById("distance").value;
-const listedRange = document.getElementById("listedRange").value;
-const rangeCategory = GetRangeCategory(dist, listedRange);
-const rangeCategoryElement = document.getElementById(rangeCategory.id);
-rangeCategoryElement.checked = true;
-console.log(rangeCategory.id);
+function updateCurRangeCategory() {
+    curRangeCategory = GetRangeCategory(eDistance.value, eListedRange.value);
+    console.log(curRangeCategory.id);
+    document.getElementById(curRangeCategory.id).checked = true;
+}
+updateCurRangeCategory();
+eDistance.onchange = updateCurRangeCategory;
+eListedRange.onchange = updateCurRangeCategory;
+
