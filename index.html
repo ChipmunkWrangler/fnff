@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+	<meta charset="UTF-8">
+	<title>Friday Night Firefight</title>
+	<script defer src="fnff.js"></script>
+	<!--meta name="viewport" content = "width=device-width,initial-scale=1.0"/-->
+    </head>
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <!--script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script> 
+    <script defer src="like_button.js"></script-->
+    <body>
+	<h1>Friday Night Firefight</h1>
+	<h2>Ranged Combat</h2>
+	<form>
+	    <input type="number">Hit Roll</input>
+	    <input type="number">Dmg Roll</input>
+    	    <input type="number" value="9">REF</input>
+    	    <input type="number" value="4">Skill</input>
+	    <input type="number" id="listedRange" value="100">Listed Range</input>
+	    <input type="number" id="distance" value="25">Distance to Target</input>
+	    <fieldset id="rangeCategory">
+		<legend>Range Category</legend>
+		<input type="radio" id="pointBlank" name="rangeCategory"/>
+		<label for="pointBlank">Point Blank</label>
+		<input type="radio" id="close" name="rangeCategory"/>
+		<label for="close">Close</label>
+		<input type="radio" id="medium" name="rangeCategory"/>
+		<label for="medium">Medium</label>
+		<input type="radio" id="long" name="rangeCategory"/>
+		<label for="long">Long</label>
+		<input type="radio" id="extreme" name="rangeCategory"/>
+		<label for="extreme">Extreme</label>
+	    </fieldset>
+	</form>
+
+	Roll needed to hit:
+	<!--div id="like_button_container"></div-->
+    </body>
+</html>
