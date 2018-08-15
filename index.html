@@ -4,42 +4,68 @@
 	<meta charset="UTF-8">
 	<title>Friday Night Firefight</title>
 	<script defer src="fnff.js"></script>
+	<link href="style.css" rel="stylesheet" type="text/css">
 	<!--meta name="viewport" content = "width=device-width,initial-scale=1.0"/-->
     </head>
     <!-- Load React. -->
     <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
     <!--script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script> 
-    <script defer src="like_button.js"></script-->
-    <body>
-	<h1>Friday Night Firefight</h1>
-	<h2>Ranged Combat</h2>
-	<form>
-	    <button id="roll" type="button">Roll</button>
-	    <input type="number" id="hitRoll">Hit Roll</input>
-	    <input type="number">Dmg Roll</input>
-    	    <input type="number" id="attribute" value="9">REF</input>
-    	    <input type="number" id="skill" value="4">Skill</input>
-	    <input type="number" id="listedRange" value="50">Listed Range</input>
-	    <input type="number" id="distance" value="25">Distance to Target</input>
-	    <fieldset id="rangeCategory">
-		<legend>Range Category</legend>
-		<input type="radio" id="pointBlank" name="rangeCategory"/>
-		<label for="pointBlank">Point Blank</label>
-		<input type="radio" id="close" name="rangeCategory"/>
-		<label for="close">Close</label>
-		<input type="radio" id="medium" name="rangeCategory"/>
-		<label for="medium">Medium</label>
-		<input type="radio" id="long" name="rangeCategory"/>
-		<label for="long">Long</label>
-		<input type="radio" id="extreme" name="rangeCategory"/>
-		<label for="extreme">Extreme</label>
-		<input type="radio" id="tooFar" name="rangeCategory"/>
-		<label for="tooFar">Too Far</label>
-	    </fieldset>
-	</form>
-
-	Roll needed to hit:<div id="dc"></div>
-	<div id="hit"></div>
-    </body>
+	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script> 
+	<script defer src="like_button.js"></script-->
+	<body>
+	    <h1>Friday Night Firefight</h1>
+	    <h2>Ranged Combat</h2>
+	    <form>
+		<div class="inputGroup">
+		    <span>
+			<label for="attribute" class="above">REF</label>
+			<input type="number" id="attribute" value="9"/>
+		    </span>
+		    <span>
+			<label for="skill" class="above">Skill</label>
+			<input type="number" id="skill" value="4"/>
+		    </span>
+		</div>
+		<div class="inputGroup">
+		    <button id="roll" type="button">Roll</button>
+		    <span>
+			<label for="hitRoll" class="above">Hit Roll</label>
+			<input type="number" id="hitRoll"/>
+		    </span>
+		    <span>
+			<label for="dmgRoll" class="above">Dmg Roll</label>
+			<input type="number" id="dmgRoll"/>
+		    </span>
+		</div>
+		<div class="inputGroup">
+		    <span>
+			<label for="listedRange" class="above">Listed Range</label>
+			<input type="number" id="listedRange" value="50"/>
+		    </span>
+		    <span>
+			<label for="distance" class="above">Distance to Target</label>
+			<input type="number" id="distance" value="25"/>
+		    </span>
+		    <fieldset id="rangeCategory">
+			<legend>Range Category</legend>
+			<input type="radio" id="pointBlank" name="rangeCategory"/>
+			<label for="pointBlank">Point Blank</label>
+			<input type="radio" id="close" name="rangeCategory"/>
+			<label for="close">Close</label>
+			<input type="radio" id="medium" name="rangeCategory"/>
+			<label for="medium">Medium</label>
+			<input type="radio" id="long" name="rangeCategory"/>
+			<label for="long">Long</label>
+			<input type="radio" id="extreme" name="rangeCategory"/>
+			<label for="extreme">Extreme</label>
+			<input hidden type="radio" id="tooFar" name="rangeCategory"/>
+		    </fieldset>
+		</div>
+	    </form>
+	    <div class="inputGroup">
+		<span><div id="hit"></div></span>
+		<span>DC:<span id="dc"></span></span>
+		<span>Total roll:<div id="totalRoll"></div></span>
+	    </div>
+	</body>
 </html>
