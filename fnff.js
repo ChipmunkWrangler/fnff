@@ -1,11 +1,12 @@
 "use strict";
 
 const modifiers = [
-    { id: "snapshot", modifier: -3 },
-    { id: "multipleActions", modifier: -3 },
-    { id: "twoWeapons", modifier: -3 },
-    { id: "targetImmobile", modifier: 4 },
-    { id: "targetDodging", modifier: -2 },
+    { modifier: -3, desc: "Snap Shot (+3 Ini)" },
+    { modifier: -3, desc: "Two Actions" },
+    { modifier: -3, desc: "Two Weapons" },
+    { modifier: 5, desc: "Ambush/Backstab" },
+    { modifier: 4, desc: "Target Immobile" },
+    { modifier: -2, desc: "Target Dodging" },
 ];
 
 const RANGE_CATEGORIES = [
@@ -58,6 +59,7 @@ const eSkill = document.getElementById("skill");
 const eHitRoll = document.getElementById("hitRoll");
 const eTotalRoll = document.getElementById("totalRoll");
 const eTotalModifier = document.getElementById("totalModifier");
+const eModifiers = document.getElementById("modifiers"); 
 var curRangeCategory;
 
 function onDistanceOrRangeInput() {
@@ -74,7 +76,7 @@ function onRangeCategoryInput(e) {
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+    return Math.floor(Math.random() * (max - min + 1)) + min; 
 }
 
 function onRoll() {
@@ -126,6 +128,33 @@ function updateModifiers() {
     updateHitDisplay();
 }
 
+function createModifierElement(modifierObj, id) {
+    var div = document.createElement("div");
+    var checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.id = id;
+    checkbox.className = "modifier";
+    checkbox.addEventListener("change", updateModifiers);
+    var label = document.createElement("label");
+    var mod = modifierObj.modifier;
+    if (mod > 0) {
+	mod = "+" + mod;
+    }
+    label.textContent = modifierObj.desc + ": " + mod;
+    label.htmlFor = id;
+    div.appendChild(checkbox);
+    div.appendChild(label);
+
+    modifierObj.element = checkbox;
+    return div;
+}
+function createModifierElements() {
+    var i = 0;
+    for (let o of modifiers) {
+	eModifiers.appendChild(createModifierElement(o, "modifier" + i));
+	++i;
+    }
+}
 eDistance.addEventListener("change", onDistanceOrRangeInput);
 eListedRange.addEventListener("change", onDistanceOrRangeInput);
 eHitRoll.addEventListener("change", updateHitDisplay );
@@ -135,10 +164,7 @@ document.getElementById("roll").addEventListener("click", onRoll);
 for (let eRangeCategory of document.querySelectorAll("#rangeCategory")) {
     eRangeCategory.addEventListener("change", onRangeCategoryInput);
 }
-for (let modifierDescriptor of modifiers) {
-    modifierDescriptor.element = document.getElementById(modifierDescriptor.id);
-    modifierDescriptor.element.addEventListener("change", updateModifiers);
-}
+createModifierElements();
 onDistanceOrRangeInput();
 updateModifiers();
 

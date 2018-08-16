@@ -1,0 +1,18 @@
+.above{
+    display: block; 
+}
+.inputGroup{
+    display: flex;
+}
+div{
+    margin-bottom: 10px;
+}
+span{
+    padding-left: 10px;
+}
+#hit{
+    font-weight:bold;
+}
+input.modifier{
+    margin-right: 10px;
+}
