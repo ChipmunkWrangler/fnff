@@ -1,5 +1,13 @@
 "use strict";
 
+const modifiers = [
+    { id: "snapshot", modifier: -3 },
+    { id: "multipleActions", modifier: -3 },
+    { id: "twoWeapons", modifier: -3 },
+    { id: "targetImmobile", modifier: 4 },
+    { id: "targetDodging", modifier: -2 },
+];
+
 const RANGE_CATEGORIES = [
     {
 	id: "pointBlank",
@@ -49,6 +57,7 @@ const eAttribute = document.getElementById("attribute");
 const eSkill = document.getElementById("skill");
 const eHitRoll = document.getElementById("hitRoll");
 const eTotalRoll = document.getElementById("totalRoll");
+const eTotalModifier = document.getElementById("totalModifier");
 var curRangeCategory;
 
 function onDistanceOrRangeInput() {
@@ -63,9 +72,9 @@ function onRangeCategoryInput(e) {
 }
 
 function getRandomIntInclusive(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
 }
 
 function onRoll() {
@@ -99,12 +108,22 @@ function updateDistanceDisplay() {
 
 function updateRangeCategory(rangeCategory) {
     curRangeCategory = rangeCategory;
-    updateDCDisplay(curRangeCategory.DC);
+    updateDCDisplay();
     updateHitDisplay();
 }
 
-function updateDCDisplay(dc) {
-    eDC.textContent = dc;
+function updateDCDisplay() {
+    eDC.textContent = getDCTotal();
+}
+
+function updateModifiers() {
+    var totalModifier = 0;
+    for (let modifierDescriptor of modifiers) {
+	if (modifierDescriptor.element.checked) {
+	    totalModifier += modifierDescriptor.modifier;
+	}
+    }
+    eTotalModifier.textContent = totalModifier;
 }
 
 eDistance.addEventListener("change", onDistanceOrRangeInput);
@@ -116,7 +135,11 @@ document.getElementById("roll").addEventListener("click", onRoll);
 for (let eRangeCategory of document.querySelectorAll("#rangeCategory")) {
     eRangeCategory.addEventListener("change", onRangeCategoryInput);
 }
-
+for (let modifierDescriptor of modifiers) {
+    modifierDescriptor.element = document.getElementById(modifierDescriptor.id);
+    modifierDescriptor.element.addEventListener("change", updateModifiers);
+}
 onDistanceOrRangeInput();
+updateModifiers();
 
 
