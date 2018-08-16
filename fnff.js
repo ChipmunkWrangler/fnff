@@ -117,13 +117,7 @@ function updateDCDisplay() {
 }
 
 function getTotalModifier() {
-    var totalModifier = 0;
-    for (let modifierDescriptor of modifiers) {
-	if (modifierDescriptor.element.checked) {
-	    totalModifier += modifierDescriptor.modifier;
-	}
-    }
-    return totalModifier;
+    return modifiers.filter( o => o.element.checked ).reduce( (sum, o) => sum + o.modifier, 0 );
 }
 
 function updateModifiers() {
