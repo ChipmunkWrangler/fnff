@@ -95,7 +95,7 @@ function getRollTotal() {
 }
 
 function getDCTotal() {
-    return curRangeCategory.DC;
+    return curRangeCategory.DC - getTotalModifier();
 }
 
 function updateRangeCategoryDisplay() {
@@ -116,14 +116,20 @@ function updateDCDisplay() {
     eDC.textContent = getDCTotal();
 }
 
-function updateModifiers() {
+function getTotalModifier() {
     var totalModifier = 0;
     for (let modifierDescriptor of modifiers) {
 	if (modifierDescriptor.element.checked) {
 	    totalModifier += modifierDescriptor.modifier;
 	}
     }
-    eTotalModifier.textContent = totalModifier;
+    return totalModifier;
+}
+
+function updateModifiers() {
+    eTotalModifier.textContent = getTotalModifier();
+    updateDCDisplay();
+    updateHitDisplay();
 }
 
 eDistance.addEventListener("change", onDistanceOrRangeInput);
